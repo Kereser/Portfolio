@@ -64,6 +64,11 @@ ul {
   font-size: 1.5rem;
   font-family: 'Abril Fatface', cursive;
   color: var(--heading-color);
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 
 .logo span {
@@ -78,11 +83,27 @@ header {
   left: 0;
   width: 100%;
   z-index: 10;
+  transition: 1s;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -ms-transition: 1s;
+  -o-transition: 1s;
+}
+
+header.scrolled {
+  background-color: var(--bg-color-transparent);
+  box-shadow: 0 5px 20px 0.1px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
 }
 
 header .logo {
   height: 120px;
   line-height: 120px;
+}
+
+header.scrolled .logo {
+  height: 80px;
+  line-height: 80px;
 }
 
 nav.container {
@@ -166,4 +187,9 @@ nav.container {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+}
+
+.toggle-btn:hover {
+  filter: brightness(96%);
+  -webkit-filter: brightness(96%);
 }
