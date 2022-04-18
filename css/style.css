@@ -145,6 +145,7 @@ ul {
   background-color: var(--bg-color);
   letter-spacing: 0;
   border-radius: 0%;
+  min-width: revert;
   border-bottom: 2.5px solid var(--main-color-2);
   -webkit-border-radius: 0%;
   -moz-border-radius: 0%;
@@ -675,4 +676,29 @@ nav.container {
 .certification-card a:hover::after {
   width: 100%;
   background-color: var(--main-color-dark-1);
+}
+
+.certifications-info-counter {
+  display: flex;
+  padding-top: 1.5rem;
+  justify-content: space-around;
+}
+
+.counter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter-cert {
+  color: var(--main-color-dark-1);
+}
+
+.counter-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.counter-cert span {
+  font-size: 2.4rem;
 }

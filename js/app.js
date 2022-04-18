@@ -6,6 +6,7 @@ const progress_bars = document.querySelectorAll('.skills svg circle');
 
 window.addEventListener('scroll', () => {
   if (!skillsPlayed) skillsCounter();
+  if (!certificationPlayed) certificationCounter();
 });
 
 function stickNavbar() {
@@ -30,8 +31,7 @@ sr.reveal('.showcase-img', { origin: 'top', delay: 500 });
 
 function hasReached(el) {
   let topPosition = el.getBoundingClientRect().top;
-  let bottomPosition = el.getBoundingClientRect().bottom;
-  console.log(topPosition + el.offsetHeight, 'bottom: ', bottomPosition);
+  // let bottomPosition = el.getBoundingClientRect().bottom;
   // todo: Me devuelve el numero de pixeles que hay desde la parte superior de la pantalla hasta la parte superior del elemento
   // todo: El offsetheight simplemente me devuelve la el height del elemento.
   // todo: Window.innerHeight me da los pixeles totales que tiene la pantalla, asi que:
@@ -40,12 +40,12 @@ function hasReached(el) {
   return topPosition + el.offsetHeight <= window.innerHeight;
 }
 
-function updateCount(num, maxNum) {
+function updateCount(num, maxNum, timer) {
   const currentNum = +num.innerText;
 
   if (currentNum < maxNum) {
     num.innerText = currentNum + 1;
-    setTimeout(() => updateCount(num, maxNum), 12);
+    setTimeout(() => updateCount(num, maxNum, timer), timer);
   }
 }
 
@@ -64,7 +64,7 @@ function skillsCounter() {
     progress_bars[i].style.setProperty('--target', strokeValue);
 
     setTimeout(() => {
-      updateCount(counter, target);
+      updateCount(counter, target, 16);
     }, 400);
   });
 
@@ -72,4 +72,28 @@ function skillsCounter() {
   progress_bars.forEach(
     (p) => (p.style.animation = 'progressBarAnimation 2s ease-in-out forwards'),
   );
+}
+
+// * Animacion para elementos de las seccion certificacion
+
+const first_counter_element = document.querySelector(
+  '.counter-item:first-child',
+);
+
+let certificationPlayed = false;
+
+function certificationCounter() {
+  if (!hasReached(first_counter_element)) return;
+
+  certificationPlayed = true;
+
+  const counters = document.querySelectorAll('.counter-item span');
+
+  counters.forEach((counter) => {
+    const target = +counter.dataset.target;
+
+    setTimeout(() => {
+      updateCount(counter, target, 100);
+    }, 400);
+  });
 }
