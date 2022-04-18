@@ -26,10 +26,17 @@ sr.reveal('.showcase-img', { origin: 'top', delay: 500 });
 
 // <a href="https://iconscout.com/illustrations/software-engineer" target="_blank">Software engineer Illustration</a> by <a href="https://iconscout.com/contributors/delesign" target="_blank">Delesign Graphics</a>
 
-// Skills bar progress animation
+// * Skills bar progress animation
 
 function hasReached(el) {
   let topPosition = el.getBoundingClientRect().top;
+  let bottomPosition = el.getBoundingClientRect().bottom;
+  console.log(topPosition + el.offsetHeight, 'bottom: ', bottomPosition);
+  // todo: Me devuelve el numero de pixeles que hay desde la parte superior de la pantalla hasta la parte superior del elemento
+  // todo: El offsetheight simplemente me devuelve la el height del elemento.
+  // todo: Window.innerHeight me da los pixeles totales que tiene la pantalla, asi que:
+  //? Lo que decimos aqui, por ejemplo, si la pantalla tiene 500px, entonces yo quiero q se me devuelva true si la altura desde la parte superior de la pantalla a la parte superior del elemento + el tamaño de mi elemento es menor a la altura del viewport, pq entonces asi sabre que mi elemento ya subio mas alla de lo que el usuario ve.
+  // * Basicamente seria lo mismo que hacer un el.getBoundingClientRect().bottom para conseguir asi los pixeles que hay desde la parte superior de la pantalla hasta la parte inferior del elemento. Y asi, comparando con el innerHeight y es menor podemos deducir que ya el elemento subio por encima de la altura que tiene el usuario y por ende, ya podemos empezar la carga de la animacion.
   return topPosition + el.offsetHeight <= window.innerHeight;
 }
 
@@ -53,6 +60,7 @@ function skillsCounter() {
     const target = +counter.dataset.target;
     const strokeValue = 427 - 427 * (target / 100);
 
+    //? Aqui lo que digo es que me ponga una propiedad que sea --target que voy a poder usar como una variable de css con el valor que tengo de strokeValue. Si es mayor, dejara un gap mayor y si es mejor, dejara un gap menor.
     progress_bars[i].style.setProperty('--target', strokeValue);
 
     setTimeout(() => {
@@ -60,7 +68,8 @@ function skillsCounter() {
     }, 400);
   });
 
+  // * Seteo una animacion al elemento de la barra para que se vea que esta cargando. Y no sea inmediato.
   progress_bars.forEach(
-    (p) => (p.style.animation = 'progress 2s ease-in-out forwards'),
+    (p) => (p.style.animation = 'progressBarAnimation 2s ease-in-out forwards'),
   );
 }

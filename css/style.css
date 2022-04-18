@@ -500,22 +500,25 @@ nav.container {
   transform: translate(-50%, -50%) rotate(-90deg);
   width: 100%;
   height: 100%;
-  -webkit-transform: translate(-50%, -50%) rot;
-  -moz-transform: translate(-50%, -50%) rot;
-  -ms-transform: translate(-50%, -50%) rot;
-  -o-transform: translate(-50%, -50%) rot;
+  -webkit-transform: translate(-50%, -50%) rotate(-90deg);
+  -moz-transform: translate(-50%, -50%) rotate(-90deg);
+  -ms-transform: translate(-50%, -50%) rotate(-90deg);
+  -o-transform: translate(-50%, -50%) rotate(-90deg);
 }
 
 .sk-progress svg circle {
   fill: var(--bg-color-3);
   stroke-width: 5px;
   stroke: var(--main-color-1);
+  /* Stroke-dasharray poniendolo de la circunferencia me da como resultado un dash del tamaño completo de la circunferencia del circulo. */
   stroke-dasharray: 427;
   stroke-linecap: round;
+  /* Entre mayor es, va quitando la longitud del dash.  */
   stroke-dashoffset: 427;
 }
 
-@keyframes progress {
+/* * Con js ya di nombre a la animacion y aqui solo tengo que citarle y decirle que hacer. En este caso solo debir ir desde si posicion inicial hacia (to) stroke-dashoffset: var(--target); que es lo que configuré en JS */
+@keyframes progressBarAnimation {
   to {
     stroke-dashoffset: var(--target);
   }
@@ -526,7 +529,7 @@ nav.container {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 1;
   color: var(--heading-color);
   font-weight: 400;
   font-size: 0.9rem;
@@ -534,4 +537,142 @@ nav.container {
 
 .counter span {
   font-size: 2.4rem;
+}
+
+/* Certifications Section */
+
+.certifications .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: 210px 210px;
+  grid-template-rows: 210px 210px;
+  row-gap: 100px;
+  column-gap: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
+  position: relative;
+}
+
+.certifications-grid::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+  border-left: 250px solid var(--main-color-1);
+  border-top: 180px solid transparent;
+  border-bottom: 180px solid transparent;
+  opacity: 0.07;
+}
+
+.certifications-grid::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border-left: 220px solid var(--bg-color);
+  border-top: 150px solid transparent;
+  border-bottom: 150px solid transparent;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
+.certification-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color-2);
+  height: 210px;
+  width: 210px;
+  cursor: pointer;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.certification-card:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+.certification-card h3 {
+  color: var(--heading-color);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.certification-card:nth-child(1) {
+  border-radius: 20px 20px 0 20px;
+  -webkit-border-radius: 20px 20px 0 20px;
+  -moz-border-radius: 20px 20px 0 20px;
+  -ms-border-radius: 20px 20px 0 20px;
+  -o-border-radius: 20px 20px 0 20px;
+}
+
+.certification-card:nth-child(2) {
+  margin-top: 290px;
+  border-radius: 0 20px 20px 0;
+  -webkit-border-radius: 0 20px 20px 0;
+  -moz-border-radius: 0 20px 20px 0;
+  -ms-border-radius: 0 20px 20px 0;
+  -o-border-radius: 0 20px 20px 0;
+}
+
+.certification-card:nth-child(3) {
+  border-radius: 20px 0 20px 20px;
+  -webkit-border-radius: 20px 0 20px 20px;
+  -moz-border-radius: 20px 0 20px 20px;
+  -ms-border-radius: 20px 0 20px 20px;
+  -o-border-radius: 20px 0 20px 20px;
+}
+
+.certification-card-img {
+  width: 70px;
+  height: 70px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.certification-card a {
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding-top: 2rem;
+  border-bottom: 2.5px solid var(--main-color-2);
+  position: relative;
+}
+
+.certification-card a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2.5px;
+  bottom: -2.5px;
+  left: 0;
+  background-color: var(--main-color-dark-1);
+  transition: 0.4s ease-in-out;
+  -webkit-transition: 0.4s ease-in-out;
+  -moz-transition: 0.4s ease-in-out;
+  -ms-transition: 0.4s ease-in-out;
+  -o-transition: 0.4s ease-in-out;
+}
+
+.certification-card a:hover::after {
+  width: 100%;
+  background-color: var(--main-color-dark-1);
 }
